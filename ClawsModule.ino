@@ -1,10 +1,17 @@
 #include "ClawMod.hpp"
 
-ClawMod Claw(10);
+/* 
+ClawModule for use with Micro Gripper Kit A - v0.0.2
+
+Written by: Piotr Kupczyk (dajmosster@gmail.com)
+GitHub: https://github.com/piotrku91/ClawModule_SF
+*/
+
+ClawMod Claw(10); // Create object with access to servo by Pin as argument (Arduino Pin 10).
 
 void setup()
 {
-Claw.InitServo();
+Claw.InitServo(); // Attach servo and run open action.
 Serial.begin(9600);
 }
 
@@ -18,7 +25,7 @@ delay(3000);
 Claw.Close();
 if (!Claw.isOpen()) Serial.println("Claw is closed!");
 delay(2000);
-Claw.Lock();
+Claw.Lock(); // If is lock, its impossible to open or close claw. 
 
 
 }
