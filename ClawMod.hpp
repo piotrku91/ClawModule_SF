@@ -52,5 +52,5 @@ public:
     ClawMod(int Pin) : m_Pin{Pin}, m_isOpen{false}, m_Lock{false} {};
 
 //Destructor
-    ~ClawMod() {ClawSrv.detach()};
+    ~ClawMod() {ClawSrv.detach();};
 };
