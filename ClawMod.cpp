@@ -1,7 +1,7 @@
 #include "ClawMod.hpp"
 
 /* 
-ClawModule for use with Micro Gripper Kit A - v0.0.2
+ClawModule for use with Micro Gripper Kit A - v0.0.3
 
 Written by: Piotr Kupczyk (dajmosster@gmail.com)
 GitHub: https://github.com/piotrku91/ClawModule_SF
@@ -10,7 +10,7 @@ GitHub: https://github.com/piotrku91/ClawModule_SF
 bool ClawMod::isOpen()
 {
 
-    if (ClawSrv.read() == ClawPosAngle::Open)
+    if (ClawSrv.read() == PosAngle::Open)
     {
         m_isOpen = true;
         return true;
@@ -29,7 +29,7 @@ void ClawMod::Open()
 {
     if ((!m_isOpen) && (!m_Lock))
     {
-        ClawSrv.write(ClawPosAngle::Open);
+        ClawSrv.write(PosAngle::Open);
         m_isOpen = true;
     };
 };
@@ -38,7 +38,7 @@ void ClawMod::Close()
 {
     if ((m_isOpen) && (!m_Lock))
     {
-        ClawSrv.write(ClawPosAngle::Close);
+        ClawSrv.write(PosAngle::Close);
         m_isOpen = false;
     };
 };
@@ -53,7 +53,7 @@ void ClawMod::Unlock()
     m_Lock = false;
 };
 
-void ClawMod::writeServo(const int& Value)
+void ClawMod::writeServo(const int &Value)
 {
     ClawSrv.write(Value);
 };

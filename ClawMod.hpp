@@ -2,12 +2,12 @@
 #include <Servo.h>
 
 /* 
-ClawModule for use with Micro Gripper Kit A - v0.0.2
+ClawModule for use with Micro Gripper Kit A - v0.0.3
 
 Written by: Piotr Kupczyk (dajmosster@gmail.com)
 GitHub: https://github.com/piotrku91/ClawModule_SF
 */
-enum ClawPosAngle // Values of servo rotate (keep in enum for easy calibration)
+enum PosAngle // Values of servo rotate (keep in enum for easy calibration)
 {
     Open = 120,
     Close = 97
@@ -17,40 +17,50 @@ class ClawMod
 {
 private:
     Servo ClawSrv; // Servo object
-    int m_Pin; // Arduino pin
+    int m_Pin;     // Arduino pin
     bool m_isOpen; // Status of claw
-    bool m_Lock; // Status of lock claw object
+    bool m_Lock;   // Status of lock claw object
 
 public:
-//Return status
+    //Return status
     bool isOpen();
     bool isLocked();
 
-//Main operations
+    //Main operations
     void Open();
     void Close();
     void Lock();
     void Unlock();
 
-//Raw access to servo object
-    void writeServo(const int& Value);
+    //Raw access to servo object
+    void writeServo(const int &Value);
     int readServo();
 
-//Prepare function
-    void InitServo(bool InitToDo=true)
+    //Prepare function
+    void InitServo(bool InitToDo = true)
     {
         ClawSrv.attach(m_Pin);
-        if (InitToDo) Open(); else Close();
+        Unlock();
+        if (InitToDo)
+        {
+            m_isOpen = false;
+            Open();
+        }
+        else
+        {
+            m_isOpen = true;
+            Close();
+        }
     };
 
-      void InitServoSilent()
+    void InitServoSilent()
     {
         ClawSrv.attach(m_Pin);
     };
 
-//Constructor
-    ClawMod(int Pin) : m_Pin{Pin}, m_isOpen{false}, m_Lock{false} {};
+    //Constructor
+    ClawMod(const int& Pin) : m_Pin{Pin}, m_isOpen{false}, m_Lock{true} {};
 
-//Destructor
-    ~ClawMod() {ClawSrv.detach();};
+    //Destructor
+    ~ClawMod() { ClawSrv.detach(); };
 };

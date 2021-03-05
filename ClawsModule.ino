@@ -1,7 +1,7 @@
 #include "ClawMod.hpp"
 
 /* 
-ClawModule for use with Micro Gripper Kit A - v0.0.2
+ClawModule for use with Micro Gripper Kit A - v0.0.3
 
 Written by: Piotr Kupczyk (dajmosster@gmail.com)
 GitHub: https://github.com/piotrku91/ClawModule_SF
@@ -21,7 +21,7 @@ delay(1000);
 if (Claw.isLocked()) Serial.println("Claw is locked!");
 Claw.Open();
 if (Claw.isOpen()) Serial.println("Claw is open!");
-delay(3000);
+delay(2000);
 Claw.Close();
 if (!Claw.isOpen()) Serial.println("Claw is closed!");
 delay(2000);
